@@ -13,7 +13,7 @@ import {ProductService} from './product.service';
 
 export class ProductListComponent implements OnInit{
 	pageTitle: string = 'Product List';
-	imageWidth: number = 50;
+	imageWidth: number = 80;
 	imageMargin: number = 2;
 	showImage: boolean = false;
 	listFilter: string = '';
@@ -39,8 +39,41 @@ export class ProductListComponent implements OnInit{
 		console.log('Populating DotsProducts...');
 		this._productService.getDotsProducts()
 			.subscribe(
-					dotsProducts => this.dotsProducts = dotsProducts,
+					dotsProducts => {
+						this.dotsProducts = dotsProducts
+						this.prependUrls();
+					},
 					error => this.errorMessage = <any>error);
+	}
+
+	prependUrls(): void{
+		
+		console.log('cycling through icon/image urls and prepending with subfolder depending on format')
+
+		for (let dotsProduct of this.dotsProducts) {
+    		console.log(dotsProduct);
+			let formatPath = '';
+			if (dotsProduct.format == 'B'){
+				formatPath = 'bluray/';
+			} else if (dotsProduct.format == 'D') {
+				formatPath = 'dvd/';
+			}
+
+			//Don't show image if none is specified on database
+			dotsProduct.show = true
+			if (null == dotsProduct.iconUrl) {
+				dotsProduct.show = false;
+			}
+
+			console.log('Product Name = ' + dotsProduct.name);
+			console.log('format = ' + dotsProduct.format);
+			console.log('formatPath = ' + formatPath);
+
+			dotsProduct.iconUrl = formatPath + dotsProduct.iconUrl;
+			console.log('dotsProduct.iconUrl now = ' + dotsProduct.iconUrl);
+			console.log('dotsProduct.show = ' + dotsProduct.show);
+		}
+
 	}
 
 	onRatingClicked(message: string): void {

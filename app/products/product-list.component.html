@@ -26,29 +26,31 @@
                             </button>
                         </th>
                         <th>Product</th>
-                        <th>Code</th>
-                        <th>Available</th>
+                        <th>Category</th>
+                        <th>Format</th>
                         <th>Price</th>
+                        <th>Stock</th>
                         <th>5 Star Rating</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor='let product of products | productFilter:listFilter'>
+                    <tr *ngFor='let dotsProduct of dotsProducts'>
                         <td>
-                            <img *ngIf='showImage'
-                                [src]='product.imageUrl'
-                                [title]='product.productName'
+                            <img *ngIf='showImage && dotsProduct.show'
+                                [src]='"./app/assets/images/" + dotsProduct.iconUrl'
+                                [title]='dotsProduct.name'
                                 [style.width.px]='imageWidth'
                                 [style.margin.width]='imageMargin'/>
                         </td>
-                        <td><a [routerLink]="['/product', product.productId]">
-                            {{product.productName}}
-                        </a></td>
-                        <td>{{product.productCode | lowercase}}</td>
-                        <td>{{product.releaseDate}}</td>
-                        <td>{{product.price | currency:'EUR' :true:'1.2-2'}}</td>
                         <td>
-                            <ai-star [rating]='product.starRating' (ratingClicked)='onRatingClicked($event)'></ai-star>
+                            {{dotsProduct.name}}
+                        </td>
+                        <td>{{dotsProduct.categoryId | lowercase}}</td>
+                        <td>{{dotsProduct.format}}</td>
+                        <td>{{dotsProduct.price | currency:'EUR' :true:'1.2-2'}}</td>
+                        <td>{{dotsProduct.stock}}</td>
+                        <td>
+                            <ai-star [rating]='dotsProduct.rating' (ratingClicked)='onRatingClicked($event)'></ai-star>
                         </td>
                     </tr>
                 </tbody>
