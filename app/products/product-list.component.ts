@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import {IProduct} from './product';
-import {IDotsProduct} from './dotsProduct';
-import {ProductService} from './product.service';
+import { IProduct } from './product';
+import { IDotsProduct } from './dotsProduct';
+import { ProductService } from './product.service';
+import { ProductTypeFilterPipe } from './product-type-filter.pipe';
 
 @Component({
 	moduleId: module.id,
@@ -16,12 +17,22 @@ export class ProductListComponent implements OnInit{
 	imageWidth: number = 80;
 	imageMargin: number = 2;
 	showImage: boolean = false;
-	listFilter: string = '';
+	nameFilter: string = '';
+	formatFilter: string = 'ABD';
+	categoryFilter: string[] = [];
 	errorMessage: string;
 	products: IProduct[] = [];
 	dotsProducts: IDotsProduct[] = [];
 
 	constructor(private _productService: ProductService) {
+	}
+
+	toggleBluray(): void {
+		this.toggleformatFilter("B");
+	}
+
+	toggleDVD(): void {
+		this.toggleformatFilter("D");
 	}
 
 	toggleImage(): void {
@@ -80,4 +91,16 @@ export class ProductListComponent implements OnInit{
 		console.log('In onRatingClicked');
 		this.pageTitle = 'Updated Product List: ' + message;
 	}
+
+	toggleformatFilter(format: string): void {
+		let index: number = this.formatFilter.indexOf(format, 0);
+
+		if (index > -1){
+			let re = new RegExp(format, "gi");
+			this.formatFilter = this.formatFilter.replace(re, '');
+		} else {
+			this.formatFilter = this.formatFilter.concat(format);
+		}
+	}
+
 }

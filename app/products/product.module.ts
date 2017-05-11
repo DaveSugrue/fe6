@@ -5,7 +5,9 @@ import { SharedModule } from '../shared/shared.module';
 
 import { ProductListComponent }  from './product-list.component';
 import { ProductDetailComponent }  from './product-detail.component';
-import { ProductFilterPipe } from './product-filter.pipe';
+import { ProductSearchFilterPipe } from './product-search-filter.pipe';
+import { ProductCategoryFilterPipe } from './product-category-filter.pipe';
+import { ProductFormatFilterPipe } from './product-format-filter.pipe';
 import { ProductService } from './product.service'
 import { ProductDetailGuard } from './product-guard.service'
 
@@ -13,7 +15,9 @@ import { ProductDetailGuard } from './product-guard.service'
 	declarations: [
 		ProductListComponent,
 		ProductDetailComponent,
-		ProductFilterPipe
+		ProductSearchFilterPipe,
+		ProductFormatFilterPipe,
+		ProductCategoryFilterPipe
 	],
 	imports: [
 		SharedModule,
