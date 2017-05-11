@@ -15,16 +15,26 @@
                 <h3>Filtered By: {{nameFilter}}</h3>
             </div>
         </div>
-        
+
         <div>
-            <button class='btn btn-primary ' (click)='toggleBluray()'>
+            <button class='btn btn-primary ' (click)='toggleFormat("B")'>
                 {{formatFilter.includes('B') ? 'Hide' : 'Show'}} Bluray
             </button>
-            <button class='btn btn-primary ' (click)='toggleDVD()'>
+            <button class='btn btn-primary ' (click)='toggleFormat("D")'>
                 {{formatFilter.includes('D') ? 'Hide' : 'Show'}} DVD
             </button>
+            <br/>
+            <br/>
         </div>
 
+        <div>
+            <button class='btn btn-primary ' (click)='toggleCategory("ACTN")'>
+                {{categoryFilter.includes('ACTN') ? 'Hide' : 'Show'}} Action
+            </button>
+            <button class='btn btn-primary ' (click)='toggleCategory("COMDY")'>
+                {{categoryFilter.includes('COMDY') ? 'Hide' : 'Show'}} Comedy
+            </button>
+        </div>
 
         <div class='table-responsive'>
             <table class='table' *ngIf='products && products.length'>
@@ -45,7 +55,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor='let dotsProduct of dotsProducts | productSearchFilter:nameFilter | productFormatFilter:formatFilter'>
+                    <tr *ngFor='let dotsProduct of dotsProducts | productSearchFilter:nameFilter | productFormatFilter:formatFilter | productCategoryFilter:categoryFilter'>
                         <td>
                             <img *ngIf='showImage && dotsProduct.show'
                                 [src]='"./app/assets/images/" + dotsProduct.iconUrl'

@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { IProduct } from './product';
 import { IDotsProduct } from './dotsProduct';
 import { ProductService } from './product.service';
-import { ProductTypeFilterPipe } from './product-type-filter.pipe';
 
 @Component({
 	moduleId: module.id,
@@ -19,7 +18,7 @@ export class ProductListComponent implements OnInit{
 	showImage: boolean = false;
 	nameFilter: string = '';
 	formatFilter: string = 'ABD';
-	categoryFilter: string[] = [];
+	categoryFilter: string = 'X';
 	errorMessage: string;
 	products: IProduct[] = [];
 	dotsProducts: IDotsProduct[] = [];
@@ -27,14 +26,14 @@ export class ProductListComponent implements OnInit{
 	constructor(private _productService: ProductService) {
 	}
 
-	toggleBluray(): void {
-		this.toggleformatFilter("B");
+	toggleCategory( category: string ): void {
+		this.categoryFilter = this.toggleformatFilter(category, this.categoryFilter);
 	}
 
-	toggleDVD(): void {
-		this.toggleformatFilter("D");
+	toggleFormat( format: string ): void {
+		this.formatFilter = this.toggleformatFilter(format, this.formatFilter);
 	}
-
+	
 	toggleImage(): void {
 		this.showImage = !this.showImage;
 	}
@@ -92,15 +91,17 @@ export class ProductListComponent implements OnInit{
 		this.pageTitle = 'Updated Product List: ' + message;
 	}
 
-	toggleformatFilter(format: string): void {
-		let index: number = this.formatFilter.indexOf(format, 0);
+	toggleformatFilter(format: string, filter: string): string {
+		let index: number = filter.indexOf(format, 0);
 
 		if (index > -1){
 			let re = new RegExp(format, "gi");
-			this.formatFilter = this.formatFilter.replace(re, '');
+			filter = filter.replace(re, '');
 		} else {
-			this.formatFilter = this.formatFilter.concat(format);
+			filter = filter.concat(format);
 		}
+
+		return filter;
 	}
 
 }

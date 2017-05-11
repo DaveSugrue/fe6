@@ -8,7 +8,6 @@ import { IDotsProduct } from './dotsProduct';
 export class ProductCategoryFilterPipe implements PipeTransform{
 
 	transform(value: IDotsProduct[], filterBy: string): IDotsProduct[] {
-		filterBy = filterBy ? filterBy.toLocaleLowerCase(): null;
-		return filterBy ? value.filter((product : IDotsProduct) => product.name.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;
+		return filterBy ? value.filter((product : IDotsProduct) => filterBy.includes(product.categoryId)) : value;
 	}
 }
