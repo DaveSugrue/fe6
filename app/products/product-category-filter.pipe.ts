@@ -1,5 +1,5 @@
 import { PipeTransform, Pipe } from '@angular/core';
-import { IDotsProduct } from './dotsProduct';
+import { IProduct } from './product';
 
 @Pipe({
 	name: 'productCategoryFilter'
@@ -7,7 +7,7 @@ import { IDotsProduct } from './dotsProduct';
 
 export class ProductCategoryFilterPipe implements PipeTransform{
 
-	transform(value: IDotsProduct[], filterBy: string): IDotsProduct[] {
-		return filterBy ? value.filter((product : IDotsProduct) => filterBy.includes(product.categoryId)) : value;
+	transform(value: IProduct[], filterBy: string): IProduct[] {
+		return filterBy ? value.filter((product : IProduct) => filterBy.includes(product.categoryId)) : value;
 	}
 }

@@ -10,11 +10,6 @@
                     [(ngModel)]='nameFilter'/>
             </div>
         </div>
-        <div class='row'>
-            <div class='col-md-6'>
-                <h3>Filtered By: {{nameFilter}}</h3>
-            </div>
-        </div>
 
         <div>
             <button class='btn btn-primary ' (click)='toggleFormat("B")'>
@@ -28,15 +23,6 @@
         </div>
 
         <div>
-            <button class='btn btn-primary ' (click)='toggleCategory("ACTN")'>
-                {{categoryFilter.includes('ACTN') ? 'Hide' : 'Show'}} Action
-            </button>
-            <button class='btn btn-primary ' (click)='toggleCategory("COMDY")'>
-                {{categoryFilter.includes('COMDY') ? 'Hide' : 'Show'}} Comedy
-            </button>
-        </div>
-
-        <div>
             <table>
                 <tr>
                     <td *ngFor='let category of categories'>
@@ -44,21 +30,18 @@
                             {{category.name}}
                         </button>
                     </td>
-                    
                 </tr>
             </table>
+
+            <br/>
+            <br/>
         </div>
 
         <div class='table-responsive'>
             <table class='table' *ngIf='products && products.length'>
                 <thead>
                     <tr>
-                        <th>
-                            <button class=' btn btn-primary '
-                                (click)='toggleImage()'>
-                                {{showImage ? 'Hide' : 'Show'}} Image
-                            </button>
-                        </th>
+                        <th></th>
                         <th>Product</th>
                         <th>Category</th>
                         <th>Format</th>
@@ -68,23 +51,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor='let dotsProduct of dotsProducts | productSearchFilter:nameFilter | productFormatFilter:formatFilter | productCategoryFilter:categoryFilter'>
+                    <tr *ngFor='let product of products | productSearchFilter:nameFilter | productFormatFilter:formatFilter | productCategoryFilter:categoryFilter'>
                         <td>
-                            <img *ngIf='showImage && dotsProduct.show'
-                                [src]='"./app/assets/images/" + dotsProduct.iconUrl'
-                                [title]='dotsProduct.name'
+                            <img *ngIf='product.show'
+                                [src]='"./app/assets/images/" + product.iconUrl'
+                                [title]='product.name'
                                 [style.width.px]='imageWidth'
                                 [style.margin.width]='imageMargin'/>
                         </td>
                         <td>
-                            {{dotsProduct.name}}
+                            {{product.name}}
                         </td>
-                        <td>{{dotsProduct.categoryId | lowercase}}</td>
-                        <td>{{dotsProduct.format}}</td>
-                        <td>{{dotsProduct.price | currency:'EUR' :true:'1.2-2'}}</td>
-                        <td>{{dotsProduct.stock}}</td>
+                        <td>{{product.categoryId | categoryDescriptionPipe:categories}}</td>
+                        <td *ngIf='product.format=="D"'>
+                            <img src="./app/assets/images/dvd.png" 
+                                title="DVD"
+                                style="width:80px;margin:2px"/>
+                        </td>
+                        <td *ngIf='product.format=="B"'>
+                            <img src="./app/assets/images/bluray.png" 
+                                title="Blu-ray"
+                                style="width:80px;margin:2px"/>
+                        </td>
+                        <td>{{product.price | currency:'EUR' :true:'1.2-2'}}</td>
+                        <td>{{product.stock}}</td>
                         <td>
-                            <ai-star [rating]='dotsProduct.rating' (ratingClicked)='onRatingClicked($event)'></ai-star>
+                            <ai-star [rating]='product.rating' (ratingClicked)='onRatingClicked($event)'></ai-star>
                         </td>
                     </tr>
                 </tbody>

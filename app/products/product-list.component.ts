@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { IProduct } from './product';
-import { IDotsProduct } from './dotsProduct';
 import { ICategory } from './category';
 import { ProductService } from './product.service';
 
@@ -22,7 +21,6 @@ export class ProductListComponent implements OnInit{
 	categoryFilter: string = 'X';
 	errorMessage: string;
 	products: IProduct[] = [];
-	dotsProducts: IDotsProduct[] = [];
 	categories: ICategory[] = [];
 
 	constructor(private _productService: ProductService) {
@@ -45,14 +43,8 @@ export class ProductListComponent implements OnInit{
 		console.log('Populating Products...');
 		this._productService.getProducts()
 			.subscribe(
-					products => this.products = products,
-					error => this.errorMessage = <any>error);
-		
-		console.log('Populating DotsProducts...');
-		this._productService.getDotsProducts()
-			.subscribe(
-					dotsProducts => {
-						this.dotsProducts = dotsProducts
+					products => {
+						this.products = products
 						this.prependUrls();
 					},
 					error => this.errorMessage = <any>error);
@@ -70,28 +62,28 @@ export class ProductListComponent implements OnInit{
 		
 		console.log('cycling through icon/image urls and prepending with subfolder depending on format')
 
-		for (let dotsProduct of this.dotsProducts) {
-    		console.log(dotsProduct);
+		for (let product of this.products) {
+    		console.log(product);
 			let formatPath = '';
-			if (dotsProduct.format == 'B'){
+			if (product.format == 'B'){
 				formatPath = 'bluray/';
-			} else if (dotsProduct.format == 'D') {
+			} else if (product.format == 'D') {
 				formatPath = 'dvd/';
 			}
 
 			//Don't show image if none is specified on database
-			dotsProduct.show = true
-			if (null == dotsProduct.iconUrl) {
-				dotsProduct.show = false;
+			product.show = true
+			if (null == product.iconUrl) {
+				product.show = false;
 			}
 
-			console.log('Product Name = ' + dotsProduct.name);
-			console.log('format = ' + dotsProduct.format);
+			console.log('Product Name = ' + product.name);
+			console.log('format = ' + product.format);
 			console.log('formatPath = ' + formatPath);
 
-			dotsProduct.iconUrl = formatPath + dotsProduct.iconUrl;
-			console.log('dotsProduct.iconUrl now = ' + dotsProduct.iconUrl);
-			console.log('dotsProduct.show = ' + dotsProduct.show);
+			product.iconUrl = formatPath + product.iconUrl;
+			console.log('dotsProduct.iconUrl now = ' + product.iconUrl);
+			console.log('dotsProduct.show = ' + product.show);
 		}
 
 	}

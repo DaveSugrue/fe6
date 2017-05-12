@@ -1,10 +1,13 @@
 export interface IProduct{
-	productId: number;
-	productName: string;
-	productCode: string;
-	releaseDate: string;
-	price: number;
+	id: number;
+	categoryId: string;
+	format: string;
+	name: string;
 	description: string;
-	starRating: number;
+	iconUrl: string;
 	imageUrl: string;
+	price: number;
+	stock: number;
+	rating: string;
+	show: boolean;
 }

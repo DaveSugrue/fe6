@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 
 import { ProductListComponent }  from './product-list.component';
 import { ProductDetailComponent }  from './product-detail.component';
+import { CategoryDescriptionPipe } from './category-description.pipe';
 import { ProductSearchFilterPipe } from './product-search-filter.pipe';
 import { ProductCategoryFilterPipe } from './product-category-filter.pipe';
 import { ProductFormatFilterPipe } from './product-format-filter.pipe';
@@ -15,6 +16,7 @@ import { ProductDetailGuard } from './product-guard.service'
 	declarations: [
 		ProductListComponent,
 		ProductDetailComponent,
+		CategoryDescriptionPipe,
 		ProductSearchFilterPipe,
 		ProductFormatFilterPipe,
 		ProductCategoryFilterPipe
