@@ -13,8 +13,8 @@ import { IProductResponse } from './product.response'
 @Injectable()
 export class ProductService {
 
-	private _productUrl = 'http://localhost:8090/product/all';
-	private _categoryUrl = 'http://localhost:8090/category';
+	private _productUrl = 'http://192.168.0.9:8090/product/all';
+	private _categoryUrl = 'http://192.168.0.9:8090/category';
 	
 	status: IStatus;
 	//dotsProducts: IDotsProduct[] = [];

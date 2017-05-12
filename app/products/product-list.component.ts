@@ -17,8 +17,8 @@ export class ProductListComponent implements OnInit{
 	imageMargin: number = 2;
 	showImage: boolean = false;
 	nameFilter: string = '';
-	formatFilter: string = 'ABD';
-	categoryFilter: string = 'X';
+	formatFilter: string = 'BDs';
+	categoryFilter: string = '';
 	errorMessage: string;
 	products: IProduct[] = [];
 	categories: ICategory[] = [];

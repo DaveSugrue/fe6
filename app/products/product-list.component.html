@@ -11,6 +11,8 @@
             </div>
         </div>
 
+        <br/>
+
         <div>
             <button class='btn btn-primary ' (click)='toggleFormat("B")'>
                 {{formatFilter.includes('B') ? 'Hide' : 'Show'}} Bluray
@@ -18,24 +20,19 @@
             <button class='btn btn-primary ' (click)='toggleFormat("D")'>
                 {{formatFilter.includes('D') ? 'Hide' : 'Show'}} DVD
             </button>
-            <br/>
-            <br/>
         </div>
 
+        <br/>
+        
         <div>
-            <table>
-                <tr>
-                    <td *ngFor='let category of categories'>
-                        <button class='btn btn-primary ' (click)='toggleCategory(category.id)'>
-                            {{category.name}}
-                        </button>
-                    </td>
-                </tr>
-            </table>
-
-            <br/>
-            <br/>
+            <span *ngFor='let category of categories'>
+                <button class='btn btn-primary ' (click)='toggleCategory(category.id)'>
+                    {{category.name}}
+                </button>
+            </span>
         </div>
+
+        <br/>
 
         <div class='table-responsive'>
             <table class='table' *ngIf='products && products.length'>
