@@ -36,6 +36,19 @@
             </button>
         </div>
 
+        <div>
+            <table>
+                <tr>
+                    <td *ngFor='let category of categories'>
+                        <button class='btn btn-primary ' (click)='toggleCategory(category.id)'>
+                            {{category.name}}
+                        </button>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+
         <div class='table-responsive'>
             <table class='table' *ngIf='products && products.length'>
                 <thead>

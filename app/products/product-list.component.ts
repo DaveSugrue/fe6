@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { IProduct } from './product';
 import { IDotsProduct } from './dotsProduct';
+import { ICategory } from './category';
 import { ProductService } from './product.service';
 
 @Component({
@@ -22,6 +23,7 @@ export class ProductListComponent implements OnInit{
 	errorMessage: string;
 	products: IProduct[] = [];
 	dotsProducts: IDotsProduct[] = [];
+	categories: ICategory[] = [];
 
 	constructor(private _productService: ProductService) {
 	}
@@ -52,6 +54,14 @@ export class ProductListComponent implements OnInit{
 					dotsProducts => {
 						this.dotsProducts = dotsProducts
 						this.prependUrls();
+					},
+					error => this.errorMessage = <any>error);
+
+		console.log('Populating Categories...');
+		this._productService.getCategories()
+			.subscribe(
+					categories => {
+						this.categories = categories
 					},
 					error => this.errorMessage = <any>error);
 	}

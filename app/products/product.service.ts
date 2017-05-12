@@ -7,6 +7,7 @@ import 'rxjs/add/operator/catch';
 
 import { IProduct } from './product'
 import { IDotsProduct } from './dotsProduct'
+import { ICategory } from './category'
 import { IStatus } from './status'
 import { IProductResponse } from './product.response'
 
@@ -15,6 +16,7 @@ export class ProductService {
 
 	private _productUrl = 'api/products/products.json';
 	private _dotsProductUrl = 'http://localhost:8090/product/all';
+	private _categoryUrl = 'http://localhost:8090/category';
 	
 	status: IStatus;
 	dotsProducts: IDotsProduct[] = [];
@@ -48,6 +50,29 @@ export class ProductService {
 				return dotsProducts;
 			})
 			.do(data => console.log('Dots Products = ' + JSON.stringify(data)))
+			.catch(this.handleError);
+	}
+
+	getCategories(): Observable<ICategory[]> {
+		return this._http.get(this._categoryUrl)
+			.map((response: Response) => { 
+				console.log('Intial Response = ' + JSON.stringify(response.json()))
+
+				let resp = <IProductResponse>response.json();
+
+				console.log('resp = ' + JSON.stringify(resp));
+
+				let status = resp.status;
+
+				console.log('Status = ' + JSON.stringify(status));
+
+				let categories = <ICategory[]>resp.object;
+
+				console.log('Categories = ' + JSON.stringify(categories));
+				
+				return categories;
+			})
+			.do(data => console.log('Categories = ' + JSON.stringify(data)))
 			.catch(this.handleError);
 	}
 
