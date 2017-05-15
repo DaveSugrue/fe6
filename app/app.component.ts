@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ProductService } from './products/product.service';
+import { MovieService } from './movies/movie.service';
 
 @Component({
     selector: 'pm-app',
@@ -11,6 +12,7 @@ import { ProductService } from './products/product.service';
                     <ul class='nav navbar-nav'>
                         <li><a [routerLink]="['/welcome']">Home</a></li>
                         <li><a [routerLink]="['/products']">Product List</a></li>
+                        <li><a [routerLink]="['/movies']">Movie List</a></li>
                     </ul>
                 </div>
             </nav>
@@ -19,7 +21,7 @@ import { ProductService } from './products/product.service';
             </div>
         </div>
     `,
-    providers: [ProductService]
+    providers: [MovieService, ProductService]
 })
 export class AppComponent {
     pageTitle: string = 'Sugrue Solutions';
