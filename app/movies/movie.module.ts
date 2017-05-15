@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '../shared/shared.module';
+import { MinutesToHoursPipe } from '../shared/minutes-to-hours.pipe'
 
 import { MovieListComponent }  from './movie-list.component';
 import { GenreDescriptionPipe } from './genre-description.pipe';
@@ -16,7 +17,8 @@ import { MovieService } from './movie.service'
 		GenreDescriptionPipe,
 		MovieSearchFilterPipe,
 		MovieFormatFilterPipe,
-		MovieGenreFilterPipe
+		MovieGenreFilterPipe,
+		MinutesToHoursPipe
 	],
 	imports: [
 		SharedModule,

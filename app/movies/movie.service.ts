@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 
 import { IMovie } from './movie'
 import { IGenre } from './genre'
-import { IStatus } from './status'
+import { IStatus } from '../shared/status'
 import { IMovieResponse } from './movie.response'
 
 @Injectable()

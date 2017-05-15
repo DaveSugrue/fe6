@@ -69,7 +69,7 @@
                                 title="Blu-ray"
                                 style="width:80px;margin:2px"/>
                         </td>
-                        <td>{{movie.duration}}</td>
+                        <td>{{movie.duration | minutesToHoursPipe}}</td>
                         <td>
                             <ai-star [rating]='movie.rating' (ratingClicked)='onRatingClicked($event)'></ai-star>
                         </td>

@@ -1,4 +1,4 @@
-import {IStatus} from './status';
+import {IStatus} from '../shared/status';
 
 export interface IMovieResponse{
 	status: IStatus;
