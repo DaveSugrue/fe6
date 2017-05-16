@@ -14,24 +14,33 @@
         <br/>
 
         <div>
-            <button class='btn btn-primary ' (click)='toggleFormat("B")'>
+            <button class='btn btn-primary' (click)='toggleFormat("B")'>
                 {{formatFilter.includes('B') ? 'Hide' : 'Show'}} Bluray
             </button>
-            <button class='btn btn-primary ' (click)='toggleFormat("D")'>
+            <button class='btn btn-primary' (click)='toggleFormat("D")'>
                 {{formatFilter.includes('D') ? 'Hide' : 'Show'}} DVD
             </button>
         </div>
 
         <br/>
         
+        <div>Select Genre of Movie: </div>
         <div>
             <span *ngFor='let genre of genres'>
-                <button class='btn btn-primary ' (click)='toggleGenre(genre.id)'>
+                <label class='checkbox-inline'>
+                    <input type='checkbox' [(ngModel)]='genre.show' (ngModelChange)='updateGenreFilter();'/>
                     {{genre.description}}
-                </button>
+                </label>
             </span>
         </div>
-
+        <div>
+            <button class='btn btn-secondary' (click)='updateAllGenreShows(true)'>
+                Select All
+            </button>
+            <button class='btn btn-secondary' (click)='updateAllGenreShows(false)'>
+                Clear All
+            </button>
+        </div>
         <br/>
 
         <div class='table-responsive'>

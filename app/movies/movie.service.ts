@@ -25,20 +25,9 @@ export class MovieService {
 	getMovies(): Observable<IMovie[]> {
 		return this._http.get(this._movieUrl)
 			.map((response: Response) => { 
-				console.log('Intial Response = ' + JSON.stringify(response.json()))
-
 				let resp = <IMovieResponse>response.json();
-
-				console.log('resp = ' + JSON.stringify(resp));
-
 				let status = resp.status;
-
-				console.log('Status = ' + JSON.stringify(status));
-
 				let movies = <IMovie[]>resp.object;
-
-				console.log('Movies = ' + JSON.stringify(movies));
-				
 				return movies;
 			})
 			.do(data => console.log(' DOING :: Movies = ' + JSON.stringify(data)))
@@ -48,20 +37,9 @@ export class MovieService {
 	getGenres(): Observable<IGenre[]> {
 		return this._http.get(this._genreUrl)
 			.map((response: Response) => { 
-				console.log('Intial Response = ' + JSON.stringify(response.json()))
-
 				let resp = <IMovieResponse>response.json();
-
-				console.log('resp = ' + JSON.stringify(resp));
-
 				let status = resp.status;
-
-				console.log('Status = ' + JSON.stringify(status));
-
 				let genres = <IGenre[]>resp.object;
-
-				console.log('Genres = ' + JSON.stringify(genres));
-				
 				return genres;
 			})
 			.do(data => console.log(' DOING :: Genres = ' + JSON.stringify(data)))
