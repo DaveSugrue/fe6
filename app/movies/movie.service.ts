@@ -22,15 +22,18 @@ export class MovieService {
 
 	constructor( private _http: Http){}
 
-	getMovies(): Observable<IMovie[]> {
-		return this._http.get(this._movieUrl)
+	getMovies(genreId: string): Observable<IMovie[]> {
+		let url: string = this._movieUrl;
+		if (genreId != 'all') {
+			url = url + '?genreId=' + genreId;
+		}
+		return this._http.get(url)
 			.map((response: Response) => { 
 				let resp = <IMovieResponse>response.json();
 				let status = resp.status;
 				let movies = <IMovie[]>resp.object;
 				return movies;
 			})
-			.do(data => console.log(' DOING :: Movies = ' + JSON.stringify(data)))
 			.catch(this.handleError);
 	}
 
@@ -42,7 +45,6 @@ export class MovieService {
 				let genres = <IGenre[]>resp.object;
 				return genres;
 			})
-			.do(data => console.log(' DOING :: Genres = ' + JSON.stringify(data)))
 			.catch(this.handleError);
 	}
 

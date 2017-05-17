@@ -10,9 +10,10 @@ import { MovieService } from './movies/movie.service';
                 <div class='container-fluid'>
                     <a class='navbar-brand'>{{pageTitle}}</a>
                     <ul class='nav navbar-nav'>
-                        <li><a [routerLink]="['/welcome']">Home</a></li>
+                        <li><a [routerLink]="['/welcome']"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                         <li><a [routerLink]="['/products']">Product List</a></li>
                         <li><a [routerLink]="['/movies']">Movie List</a></li>
+                        <li><a [routerLink]="['/moviesserviced']">Serviced Movie List</a></li>
                     </ul>
                 </div>
             </nav>

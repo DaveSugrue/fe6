@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { StarComponent } from '../shared/star.component';
+import { StarComponent } from './star.component';
+import { MinutesToHoursPipe } from './minutes-to-hours.pipe';
 
 @NgModule({
 	declarations: [
-		StarComponent
+		StarComponent,
+		MinutesToHoursPipe
 	],
 	imports: [
 		CommonModule
@@ -14,7 +16,8 @@ import { StarComponent } from '../shared/star.component';
 	exports: [
 		CommonModule,
 		FormsModule,
-		StarComponent
+		StarComponent,
+		MinutesToHoursPipe
 	]
 })
 

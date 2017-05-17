@@ -7,12 +7,12 @@ import { MovieService } from './movie.service';
 
 @Component({
 	moduleId: module.id,
-	templateUrl: 'movie-list.component.html',
+	templateUrl: 'movie-list-serviced.component.html',
 	styleUrls: ['movie-list.component.css']
 })
 
-export class MovieListComponent implements OnInit{
-	pageTitle: string = 'Movie List';
+export class MovieListServicedComponent implements OnInit{
+	pageTitle: string = 'Serviced Movie List';
 	imageWidth: number = 80;
 	imageMargin: number = 2;
 	nameFilter: string = '';
@@ -21,6 +21,7 @@ export class MovieListComponent implements OnInit{
 	errorMessage: string;
 	movies: IMovie[] = [];
 	genres: IGenre[] = [];
+	selectedGenre: string = '';
 
 	constructor(private _movieService: MovieService) {
 	}
@@ -28,17 +29,8 @@ export class MovieListComponent implements OnInit{
 	ngOnInit(): void{
 		console.log('In OnInit');
 		console.log('Populating Movies...');
+		//this.getMovieList('all');
 		
-		this._movieService.getMovies('all')
-			.subscribe(
-					movies => {
-						this.movies = movies;
-						this.prependUrls();
-					},
-					error => {
-						this.errorMessage = <any>error;
-						console.log('ERROR !!! ' + this.errorMessage);
-					});
 		
 		console.log('Populating Genres...');
 		this._movieService.getGenres()
@@ -53,6 +45,19 @@ export class MovieListComponent implements OnInit{
 					});
 	}
 
+	getMovieList(genreId: string): void {
+		this.selectedGenre = this.getGenreDescription(genreId);
+		this._movieService.getMovies(genreId)
+			.subscribe(
+					movies => {
+						this.movies = movies;
+						this.prependUrls();
+					},
+					error => {
+						this.errorMessage = <any>error;
+						console.log('ERROR !!! ' + this.errorMessage);
+					});
+	}
 	prependUrls(): void{
 		
 		console.log('cycling through image names/urls and prepending with subfolder depending on format')
@@ -71,6 +76,15 @@ export class MovieListComponent implements OnInit{
 			movie.image = formatPath + movie.image;
 		}
 
+	}
+
+	getGenreDescription( genreId: string): string {
+		for (let genre of this.genres) {
+			if ( genre.id == genreId ) {
+				return genre.description;
+			}
+		}
+		return 'all';
 	}
 
 	updateAllGenreShows(showAllGenres: boolean): void {
