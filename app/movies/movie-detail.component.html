@@ -1,0 +1,62 @@
+<div class='panel panel-primary'>
+	<div class='panel-heading'>
+		{{pageTitle + ': ' + movie.name}}
+	</div>
+
+	<div class='panel-body'>
+        <div class='row'>
+            <div class='col-md-6'>
+                <div class='row'>
+                    <div class='col-md-3'>Name:</div>
+                    <div class='col-md-6'>{{movie.name}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>Genre:</div>
+                    <div class='col-md-6'>{{movie.genreId | genreDescriptionPipe:genres}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>Notes:</div>
+                    <div class='col-md-6'>{{movie.notes}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>Duration:</div>
+                    <div class='col-md-6'>{{movie.duration | minutesToHoursPipe}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>5 Star Rating:</div>
+                    <div class='col-md-6'>
+                        <ai-star [rating]='movie.rating'
+                                (ratingClicked)='onRatingClicked($event)'>
+                        </ai-star>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>Format:</div>
+                    <div class='col-md-6' *ngIf='movie.format=="D"'>
+                        <img src="./app/assets/icons/dvd.png" 
+                            title="DVD"
+                            style="width:80px;margin:2px"/>
+                    </div>
+                    <div class='col-md-6' *ngIf='movie.format=="B"'>
+                        <img src="./app/assets/icons/bluray.png" 
+                            title="DVD"
+                            style="width:80px;margin:2px"/>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-6'>
+                <img class='center-block img-responsive' *ngIf='movie.show'
+                     [style.width.px]='200' 
+                     [style.margin.px]='2' 
+                     [src]='movie.image'
+                     [title]='movie.name'>
+            </div>
+        </div>
+    </div>
+
+	<div class='panel-footer'>
+		<a class='btn btn-default' (click)='onBack()' style='width:80px'>
+			<i class='glyphicon glyphicon-chevron-left'></i> Back
+		</a>
+	</div>
+</div>

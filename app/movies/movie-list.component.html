@@ -59,7 +59,7 @@
                     <tr *ngFor='let movie of movies | movieSearchFilter:nameFilter | movieFormatFilter:formatFilter | movieGenreFilter:genreFilter'>
                         <td>
                             <img *ngIf='movie.show'
-                                [src]='"./app/assets/images/" + movie.image'
+                                [src]='"./app/assets/icons/" + movie.image'
                                 [title]='movie.name'
                                 [style.width.px]='imageWidth'
                                 [style.margin.width]='imageMargin'/>
@@ -69,12 +69,12 @@
                         </td>
                         <td>{{movie.genreId | genreDescriptionPipe:genres}}</td>
                         <td *ngIf='movie.format=="D"'>
-                            <img src="./app/assets/images/dvd.png" 
+                            <img src="./app/assets/icons/dvd.png" 
                                 title="DVD"
                                 style="width:80px;margin:2px"/>
                         </td>
                         <td *ngIf='movie.format=="B"'>
-                            <img src="./app/assets/images/bluray.png" 
+                            <img src="./app/assets/icons/bluray.png" 
                                 title="Blu-ray"
                                 style="width:80px;margin:2px"/>
                         </td>

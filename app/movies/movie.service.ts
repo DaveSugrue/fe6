@@ -14,7 +14,7 @@ import { IMovieResponse } from './movie.response'
 export class MovieService {
 
 	private _hostUrl = 'http://192.168.0.9:8090/';
-	private _movieUrl = this._hostUrl + 'movie/all';
+	private _movieUrl = this._hostUrl + 'movie';
 	private _genreUrl = this._hostUrl +'genre';
 	
 	status: IStatus;
@@ -23,7 +23,7 @@ export class MovieService {
 	constructor( private _http: Http){}
 
 	getMovies(genreId: string): Observable<IMovie[]> {
-		let url: string = this._movieUrl;
+		let url: string = this._movieUrl + '/all';
 		if (genreId != 'all') {
 			url = url + '?genreId=' + genreId;
 		}
@@ -33,6 +33,18 @@ export class MovieService {
 				let status = resp.status;
 				let movies = <IMovie[]>resp.object;
 				return movies;
+			})
+			.catch(this.handleError);
+	}
+
+	getMovie(id: number): Observable<IMovie> {
+		let url: string = this._movieUrl + '?id=' + id;
+		return this._http.get(url)
+			.map((response: Response) => { 
+				let resp = <IMovieResponse>response.json();
+				let status = resp.status;
+				let movies = <IMovie[]>resp.object;
+				return movies[0]
 			})
 			.catch(this.handleError);
 	}

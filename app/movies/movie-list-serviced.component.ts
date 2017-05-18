@@ -27,12 +27,6 @@ export class MovieListServicedComponent implements OnInit{
 	}
 
 	ngOnInit(): void{
-		console.log('In OnInit');
-		console.log('Populating Movies...');
-		//this.getMovieList('all');
-		
-		
-		console.log('Populating Genres...');
 		this._movieService.getGenres()
 			.subscribe(
 					genres => {
@@ -51,17 +45,16 @@ export class MovieListServicedComponent implements OnInit{
 			.subscribe(
 					movies => {
 						this.movies = movies;
-						this.prependUrls();
+						this.updateIconUrls();
 					},
 					error => {
 						this.errorMessage = <any>error;
 						console.log('ERROR !!! ' + this.errorMessage);
 					});
 	}
-	prependUrls(): void{
-		
-		console.log('cycling through image names/urls and prepending with subfolder depending on format')
 
+	updateIconUrls(): void{
+		let rootImageUrl = './app/assets/icons/';
 		for (let movie of this.movies) {
 			let formatPath = 'dvd/';
 			if (movie.format == 'B'){
@@ -73,7 +66,7 @@ export class MovieListServicedComponent implements OnInit{
 			if (null == movie.image) {
 				movie.show = false;
 			}
-			movie.image = formatPath + movie.image;
+			movie.image = rootImageUrl + formatPath + movie.image;
 		}
 
 	}
