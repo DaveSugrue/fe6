@@ -1,29 +1,30 @@
 <div class='panel panel-primary'>
 	<div class='panel-heading'>
-		{{pageTitle + ': ' + movie.name}}
+		<span>{{pageTitle + ': ' + movie.name}}</span>
+        <button class="btn btn-header glyphicon glyphicon-edit" (click)='toggleEdit()' title='Edit Movie'></button>
 	</div>
 
-	<div class='panel-body'>
+	<div class='panel-body' *ngIf='!edit'>
         <div class='row'>
             <div class='col-md-6'>
                 <div class='row'>
-                    <div class='col-md-3'>Name:</div>
+                    <div class='col-md-4 label'>Name:</div>
                     <div class='col-md-6'>{{movie.name}}</div>
                 </div>
                 <div class='row'>
-                    <div class='col-md-3'>Genre:</div>
+                    <div class='col-md-4 label'>Genre:</div>
                     <div class='col-md-6'>{{movie.genreId | genreDescriptionPipe:genres}}</div>
                 </div>
                 <div class='row'>
-                    <div class='col-md-3'>Notes:</div>
+                    <div class='col-md-4 label'>Notes:</div>
                     <div class='col-md-6'>{{movie.notes}}</div>
                 </div>
                 <div class='row'>
-                    <div class='col-md-3'>Duration:</div>
+                    <div class='col-md-4 label'>Duration:</div>
                     <div class='col-md-6'>{{movie.duration | minutesToHoursPipe}}</div>
                 </div>
                 <div class='row'>
-                    <div class='col-md-3'>5 Star Rating:</div>
+                    <div class='col-md-4 label'>Rating:</div>
                     <div class='col-md-6'>
                         <ai-star [rating]='movie.rating'
                                 (ratingClicked)='onRatingClicked($event)'>
@@ -31,7 +32,7 @@
                     </div>
                 </div>
                 <div class='row'>
-                    <div class='col-md-3'>Format:</div>
+                    <div class='col-md-4 label'>Format:</div>
                     <div class='col-md-6' *ngIf='movie.format=="D"'>
                         <img src="./app/assets/icons/dvd.png" 
                             title="DVD"
@@ -39,7 +40,7 @@
                     </div>
                     <div class='col-md-6' *ngIf='movie.format=="B"'>
                         <img src="./app/assets/icons/bluray.png" 
-                            title="DVD"
+                            title="Blu-ray"
                             style="width:80px;margin:2px"/>
                     </div>
                 </div>
@@ -48,15 +49,102 @@
                 <img class='center-block img-responsive' *ngIf='movie.show'
                      [style.width.px]='200' 
                      [style.margin.px]='2' 
-                     [src]='movie.image'
+                     [src]='movie.imageUrl'
                      [title]='movie.name'>
             </div>
         </div>
+        
     </div>
 
-	<div class='panel-footer'>
+    <div class='panel-body' *ngIf='edit'>
+        <div class='row'>
+            <div class='col-md-6'>
+                <div class='row'>
+                    <div class='col-md-4 label'>Name:</div>
+                    <div class='col-md-6'>
+                        <input class="form-control" type='text' [(ngModel)]='movie.name' (ngModelChange)="requiresSave()"/>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-4 label'>Genre:</div>
+                    <div class='col-md-6'>
+                        <select class="form-control" id="power" required [(ngModel)]="movie.genreId" (ngModelChange)="requiresSave()">
+                            <option *ngFor="let genre of genres" [value]="genre.id">{{genre.description}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-4 label'>Format:</div>
+                    <div class='col-md-6'>
+                        <select class="form-control" id="power" required [(ngModel)]="movie.format" (ngModelChange)="requiresSave()">
+                            <option [value]="'D'">DVD</option>
+                            <option [value]="'B'">Blu-ray</option>
+                        </select>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-4 label'>Notes:</div>
+                    <div class='col-md-6'>
+                        <textarea class="form-control" [(ngModel)]='movie.notes'(ngModelChange)="requiresSave()"></textarea>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-4 label'>Duration (minutes):</div>
+                    <div class='col-md-6'>
+                        <input type='text' class="form-control" [(ngModel)]='movie.duration' required (ngModelChange)="requiresSave()"/>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-4 label'>Rating:</div>
+                    <div class='col-md-6'>
+                        <p-slider [(ngModel)]="movie.rating" [min]="0" [max]="100" (ngModelChange)="requiresSave()"></p-slider> {{movie.rating}}
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-4 label'>Image Name:</div>
+                    <div class='col-md-6'>
+                        <input type='text' class="form-control" [(ngModel)]='movie.image' (ngModelChange)="requiresSave()">
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-6'>
+                <img class='center-block img-responsive' *ngIf='movie.show'
+                     [style.width.px]='200' 
+                     [style.margin.px]='2' 
+                     [src]='movie.imageUrl'
+                     [title]='movie.name'>
+            </div>
+            <div class='col-md-6'>
+                <a class="btn btn-default" (click)='setImageUrl()'>
+                    <span class="glyphicon glyphicon-refresh"></span>
+                </a>
+                Refresh Image
+            </div>
+            <div class='col-md-6'>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+            </div>
+            <div class='col-md-6' *ngIf='saved == "N"'>
+                <a class="btn btn-default" (click)='saveMovie()'>
+                    <span class="glyphicon glyphicon-floppy-disk"></span>
+                </a>
+                Save Changes
+            </div>
+            <div class='col-md-6' *ngIf='saved == "Y"'>
+                <a class="btn btn-default">
+                    <span class="glyphicon glyphicon-floppy-saved"></span>
+                </a>
+                Changes Saved
+            </div>
+        </div>
+    </div>
+	
+    <div class='panel-footer'>
 		<a class='btn btn-default' (click)='onBack()' style='width:80px'>
 			<i class='glyphicon glyphicon-chevron-left'></i> Back
 		</a>
 	</div>
+
 </div>

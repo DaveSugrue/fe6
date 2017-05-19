@@ -12,6 +12,9 @@ import { MovieGenreFilterPipe } from './movie-genre-filter.pipe';
 import { MovieFormatFilterPipe } from './movie-format-filter.pipe';
 import { MovieService } from './movie.service'
 
+import { SliderModule } from 'primeng/components/slider/slider';
+
+
 @NgModule({
 	declarations: [
 		MovieListComponent,
@@ -23,6 +26,7 @@ import { MovieService } from './movie.service'
 		MovieGenreFilterPipe
 	],
 	imports: [
+		SliderModule,
 		SharedModule,
 		RouterModule.forChild([
 			{ path: 'moviesserviced', component: MovieListServicedComponent },

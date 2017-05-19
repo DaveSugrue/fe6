@@ -8,4 +8,5 @@ export interface IMovie{
 	image: string;
 	rating: string;
 	show: boolean;
+	imageUrl: string;
 }

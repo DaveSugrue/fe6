@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Subscription }       from 'rxjs/Subscription';
+import { SliderModule } from 'primeng/primeng';
 
 import { IMovie } from './movie';
 import { IGenre } from './genre';
 import { MovieService } from './movie.service';
 
 @Component({
-	templateUrl: 'app/movies/movie-detail.component.html'
+	templateUrl: 'app/movies/movie-detail.component.html',
+	styleUrls: ['app/movies/movie-list.component.css']
 })
 
 export class MovieDetailComponent{
@@ -16,6 +17,9 @@ export class MovieDetailComponent{
 	movie: IMovie = <IMovie>{};
 	genres: IGenre[] = [];
 	errorMessage: string;
+	edit: boolean = false;
+	create: boolean = false;
+	saved: string = "X";
 
 	constructor(private _route: ActivatedRoute, private _router: Router, private _movieService: MovieService) {
 
@@ -36,7 +40,7 @@ export class MovieDetailComponent{
 			.subscribe(
 				movie => {
 					this.movie = movie;
-					this.prependUrl();
+					this.setImageUrl();
 				},
 				error => {
 					this.errorMessage = <any>error;
@@ -44,7 +48,7 @@ export class MovieDetailComponent{
 				});
 	}
 
-	prependUrl(): void{
+	setImageUrl(): void{
 		let rootImageUrl = './app/assets/images/';
 		let formatPath = 'dvd/';
 		if (this.movie.format == 'B'){
@@ -56,10 +60,42 @@ export class MovieDetailComponent{
 		if (null == this.movie.image) {
 			this.movie.show = false;
 		}
-		this.movie.image = rootImageUrl + formatPath + this.movie.image;
+		this.movie.imageUrl = rootImageUrl + formatPath + this.movie.image;
+	}
+
+	toggleEdit(): void {
+		this.edit = !this.edit;
+		this.saved = "X";//reset the saved flag
+	}
+
+	requiresSave(): void{
+		console.log("needs saving!!!")
+		this.saved = "N";
+	}
+
+	saveMovie(): void {
+		if (this.validMovie()) {
+			if (this.create) { //creating
+				
+			} else { //updating
+				this._movieService.updateMovie(this.movie)
+				this._movieService.updateMovie(this.movie)
+                    .subscribe(
+						movie => this.saved = "Y",
+                		error =>  this.errorMessage = <any>error);
+			}
+		}
+	}
+
+	validMovie(): boolean{
+		return true;
 	}
 
 	onBack(): void {
-		this._router.navigate(['/moviesserviced']);
+		if (this.edit) {
+			this.toggleEdit();
+		} else {
+			this._router.navigate(['/moviesserviced']);
+		}
 	}
 }

@@ -8,3 +8,23 @@ thead {
 .toggleButtonPressed {
 	background-color: rgba(51,122,183,0.5);
 }
+
+.btn-header {
+	color: white;
+	background-color: rgba(0,0,0,0);
+	border-color: rgba(0,0,0,0);
+	float:right;
+	font-size: x-large;
+	margin: -8px;
+}
+
+.row {
+	margin: 25px;
+}
+
+.label{
+	font-size: medium;
+	font-weight: bold;
+	text-align: left;
+	color: #333;
+}

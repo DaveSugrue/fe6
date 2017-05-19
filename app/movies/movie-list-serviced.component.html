@@ -62,7 +62,7 @@
                     <tr *ngFor='let movie of movies | movieSearchFilter:nameFilter | movieFormatFilter:formatFilter'>
                         <td>
                             <img *ngIf='movie.show'
-                                [src]='movie.image'
+                                [src]='movie.imageUrl'
                                 [title]='movie.name'
                                 [style.width.px]='imageWidth'
                                 [style.margin.width]='imageMargin'/>
