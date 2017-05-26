@@ -60,7 +60,7 @@ export class MovieDetailComponent{
 		if (null == this.movie.image) {
 			this.movie.show = false;
 		}
-		this.movie.imageUrl = rootImageUrl + formatPath + this.movie.image;
+		this.movie.imageUrl = rootImageUrl + formatPath + this.movie.image + ".jpg";
 	}
 
 	toggleEdit(): void {

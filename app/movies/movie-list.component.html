@@ -59,7 +59,7 @@
                     <tr *ngFor='let movie of movies | movieSearchFilter:nameFilter | movieFormatFilter:formatFilter | movieGenreFilter:genreFilter'>
                         <td>
                             <img *ngIf='movie.show'
-                                [src]='"./app/assets/icons/" + movie.image'
+                                [src]='"./app/assets/icons/" + movie.image + ".jpg"'
                                 [title]='movie.name'
                                 [style.width.px]='imageWidth'
                                 [style.margin.width]='imageMargin'/>

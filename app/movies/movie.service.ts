@@ -31,7 +31,7 @@ export class MovieService {
 			.map((response: Response) => { 
 				let resp = <IMovieResponse>response.json();
 				let status = resp.status;
-				let movies = <IMovie[]>resp.object;
+				let movies = <IMovie[]>resp.objects;
 				return movies;
 			})
 			.catch(this.handleError);
@@ -43,7 +43,7 @@ export class MovieService {
 			.map((response: Response) => { 
 				let resp = <IMovieResponse>response.json();
 				let status = resp.status;
-				let movies = <IMovie[]>resp.object;
+				let movies = <IMovie[]>resp.objects;
 				return movies[0]
 			})
 			.catch(this.handleError);
@@ -58,7 +58,7 @@ export class MovieService {
             .map((response: Response) => {
 				let resp = <IMovieResponse>response.json();
 				let status = resp.status;
-				let movies = <IMovie[]>resp.object;
+				let movies = <IMovie[]>resp.objects;
 				return movies[0]
 			})
             .catch(this.handleError);
@@ -69,7 +69,7 @@ export class MovieService {
 			.map((response: Response) => { 
 				let resp = <IMovieResponse>response.json();
 				let status = resp.status;
-				let genres = <IGenre[]>resp.object;
+				let genres = <IGenre[]>resp.objects;
 				return genres;
 			})
 			.catch(this.handleError);

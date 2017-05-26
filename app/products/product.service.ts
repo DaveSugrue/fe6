@@ -33,8 +33,13 @@ export class ProductService {
 				let status = resp.status;
 
 				console.log('Status = ' + JSON.stringify(status));
+				console.log('Status Code = ' + status.code);
+				console.log('Status Message = ' + status.messages[0]);
+			
+				console.log('resp object = ' + JSON.stringify(resp.objects));
+				console.log('resp object 0 = ' + JSON.stringify(resp.objects[0]));
 
-				let products = <IProduct[]>resp.object;
+				let products = <IProduct[]>resp.objects;
 
 				console.log('Products = ' + JSON.stringify(products));
 				
@@ -57,7 +62,7 @@ export class ProductService {
 
 				console.log('Status = ' + JSON.stringify(status));
 
-				let categories = <ICategory[]>resp.object;
+				let categories = <ICategory[]>resp.objects;
 
 				console.log('Categories = ' + JSON.stringify(categories));
 				

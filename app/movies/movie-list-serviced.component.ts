@@ -66,7 +66,7 @@ export class MovieListServicedComponent implements OnInit{
 			if (null == movie.image) {
 				movie.show = false;
 			}
-			movie.imageUrl = rootImageUrl + formatPath + movie.image;
+			movie.imageUrl = rootImageUrl + formatPath + movie.image + ".jpg";
 		}
 
 	}
