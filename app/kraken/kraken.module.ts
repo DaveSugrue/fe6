@@ -6,15 +6,11 @@ import { SharedModule } from '../shared/shared.module';
 import { KrakenComponent }  from './kraken.component';
 import { KrakenService } from './kraken.service'
 
-import { SliderModule } from 'primeng/components/slider/slider';
-
-
 @NgModule({
 	declarations: [
 		KrakenComponent
 	],
 	imports: [
-		SliderModule,
 		SharedModule,
 		RouterModule.forChild([
 			{ path: 'kraken', component: KrakenComponent }
