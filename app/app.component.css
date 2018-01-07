@@ -5,3 +5,10 @@ li {
 div.panel-heading {
    font-size: x-large; 
 }
+
+.label{
+	font-size: medium;
+	font-weight: bold;
+	text-align: left;
+	color: #333;
+}

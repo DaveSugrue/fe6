@@ -1,15 +1,34 @@
 <div class='panel panel-primary'>
     <div class='panel-heading'>
-        {{pageTitle}}
+        <span>Ripple Details</span>
     </div>
+    
     <div class='panel-body'>
         <div class='row'>
-            <div class='col-md-2'>Ticker :</div>
-            <div class='col-md-4'>
-                {{lastTradeClosed | currency : 'EUR' : true : '1.2-2'}}
+            <div class='col-md-6'>
+                <div class='row'>
+                    <div class='col-md-4 label'>Ripple:</div>
+                    <div class='col-md-6'>{{lastTradeClosed | currency : 'EUR' : true : '1.2-2'}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-4 label'>Total Value:</div>
+                    <div class='col-md-6'>{{value | currency : 'EUR' : true : '1.2-2'}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-4 label'>Profit:</div>
+                    <div class='col-md-6'>{{profit | currency : 'EUR' : true : '1.2-2'}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-4 label'>Percent:</div>
+                    <div class='col-md-6'>{{percent | number : '1.2-2'}}%</div>
+                </div>
             </div>
         </div>
+    </div>
 
-        <br/>
+    <div class='panel-footer'>
+		<a class='btn btn-default' (click)='onBack()' style='width:80px'>
+			<i class='glyphicon glyphicon-chevron-left'></i> Back
+		</a>
     </div>
 </div>

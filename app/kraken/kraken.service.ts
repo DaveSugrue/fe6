@@ -21,13 +21,8 @@ export class KrakenService {
 		console.log('hitting url ' + url);
 		return this._http.get(url)
 			.map((response: Response) => { 
-				console.log('response.json() =' + response.json());
 				let resp = <IKrakenResponse>response.json();
-				console.log('resp = ' + resp);
 				let ticker = resp.result;
-				console.log('ticker = ' + ticker);
-				console.log('ticker.XXRPZEUR.o = ' + ticker.XXRPZEUR.o);
-				console.log('ticker.XXRPZEUR.c[0] = ' + ticker.XXRPZEUR.c[0]);
 				return ticker;
 			})
 			.catch(this.handleError);

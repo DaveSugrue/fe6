@@ -6,6 +6,7 @@ import { RouteReuseStrategy } from '@angular/router';
 
 import { AppComponent }  from './app.component';
 import { WelcomeComponent }  from './home/welcome.component';
+import { TickerComponent }  from './kraken/ticker.component';
 
 import { CustomReuseStrategy } from './reuse.strategy';
 
@@ -28,7 +29,8 @@ import { KrakenModule } from './kraken/kraken.module';
     ],
   declarations: [
     AppComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    TickerComponent
   ],
   providers: [
         {provide: RouteReuseStrategy, useClass: CustomReuseStrategy}
