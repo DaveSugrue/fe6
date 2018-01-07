@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductService } from './products/product.service';
 import { MovieService } from './movies/movie.service';
+import { KrakenService } from './kraken/kraken.service';
 
 @Component({
     selector: 'pm-app',
@@ -13,6 +14,7 @@ import { MovieService } from './movies/movie.service';
                         <li><a [routerLink]="['/welcome']"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                         <li><a [routerLink]="['/products']">Product List</a></li>
                         <li><a [routerLink]="['/movies']">Movie List</a></li>
+                        <li><a [routerLink]="['/kraken']">Kraken</a></li>
                         <li><a [routerLink]="['/moviesserviced']">Serviced Movie List</a></li>
                     </ul>
                 </div>
@@ -22,7 +24,7 @@ import { MovieService } from './movies/movie.service';
             </div>
         </div>
     `,
-    providers: [MovieService, ProductService]
+    providers: [MovieService, ProductService, KrakenService]
 })
 export class AppComponent {
     pageTitle: string = 'Sugrue Solutions';

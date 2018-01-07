@@ -11,6 +11,7 @@ import { CustomReuseStrategy } from './reuse.strategy';
 
 import { ProductModule } from './products/product.module';
 import { MovieModule } from './movies/movie.module';
+import { KrakenModule } from './kraken/kraken.module';
 
 @NgModule({
   imports: [ 
@@ -22,7 +23,8 @@ import { MovieModule } from './movies/movie.module';
         { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
       ]),
       ProductModule,
-      MovieModule
+      MovieModule,
+      KrakenModule
     ],
   declarations: [
     AppComponent,
