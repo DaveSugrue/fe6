@@ -13,9 +13,9 @@ import { IMovieResponse } from './movie.response'
 @Injectable()
 export class MovieService {
 
-	private _hostUrl = 'http://192.168.0.9:8090/';
-	private _movieUrl = this._hostUrl + 'movie';
-	private _genreUrl = this._hostUrl +'genre';
+	private _hostUrl = 'http://192.168.1.1:8090/';
+	private _movieUrl = this._hostUrl + 'movies';
+	private _genreUrl = this._hostUrl +'genres';
 	
 	status: IStatus;
 	//dotsProducts: IDotsProduct[] = [];
@@ -23,7 +23,7 @@ export class MovieService {
 	constructor( private _http: Http){}
 
 	getMovies(genreId: string): Observable<IMovie[]> {
-		let url: string = this._movieUrl + '/all';
+		let url: string = this._movieUrl;
 		if (genreId != 'all') {
 			url = url + '?genreId=' + genreId;
 		}
