@@ -11,12 +11,12 @@ import { MovieService } from './movie.service';
 	styleUrls: ['movie-list.component.css']
 })
 
-export class MovieListServicedComponent implements OnInit{
+export class MovieListServicedComponent implements OnInit {
 	pageTitle: string = 'Serviced Movie List';
 	imageWidth: number = 80;
 	imageMargin: number = 2;
 	nameFilter: string = '';
-	formatFilter: string = 'BDs';
+	formatFilter: string = 'UBDs';
 	genreFilter: string = 'X';
 	errorMessage: string;
 	movies: IMovie[] = [];
@@ -26,7 +26,7 @@ export class MovieListServicedComponent implements OnInit{
 	constructor(private _movieService: MovieService) {
 	}
 
-	ngOnInit(): void{
+	ngOnInit(): void {
 		this._movieService.getGenres()
 			.subscribe(
 					genres => {
@@ -53,15 +53,15 @@ export class MovieListServicedComponent implements OnInit{
 					});
 	}
 
-	updateIconUrls(): void{
+	updateIconUrls(): void {
 		let rootImageUrl = './app/assets/icons/';
 		for (let movie of this.movies) {
 			let formatPath = 'dvd/';
-			if (movie.format == 'B'){
+			if (movie.format == 'B') {
 				formatPath = 'bluray/';
 			}
 
-			//Don't show image if none is specified on database
+			// Don't show image if none is specified on database
 			movie.show = true
 			if (null == movie.image) {
 				movie.show = false;
@@ -91,7 +91,7 @@ export class MovieListServicedComponent implements OnInit{
 		this.genreFilter = 'X';
 		for (let genre of this.genres){
 			if ( genre.show ) {
-				this.genreFilter =this.genreFilter.concat(genre.id);
+				this.genreFilter = this.genreFilter.concat(genre.id);
 			}
 		}
 	}
@@ -103,7 +103,7 @@ export class MovieListServicedComponent implements OnInit{
 	toggleformatFilter(format: string, filter: string): string {
 		let index: number = filter.indexOf(format, 0);
 
-		if (index > -1){
+		if (index > -1) {
 			let re = new RegExp(format, "gi");
 			filter = filter.replace(re, '');
 		} else {

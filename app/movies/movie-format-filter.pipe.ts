@@ -5,9 +5,9 @@ import { IMovie } from './movie';
 	name: 'movieFormatFilter'
 })
 
-export class MovieFormatFilterPipe implements PipeTransform{
+export class MovieFormatFilterPipe implements PipeTransform {
 
 	transform(value: IMovie[], filterBy: string): IMovie[] {
-		return filterBy ? value.filter((movie : IMovie) => filterBy.includes(movie.format)) : value;
+		return filterBy ? value.filter((movie: IMovie) => filterBy.includes(movie.format)) : value;
 	}
 }

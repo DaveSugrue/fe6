@@ -6,8 +6,7 @@
         <div class='row'>
             <div class='col-md-2'>Search Movies :</div>
             <div class='col-md-4'>
-                <input type='text' 
-                    [(ngModel)]='nameFilter'/>
+                <input type='text' [(ngModel)]='nameFilter' />
             </div>
         </div>
 
@@ -26,16 +25,19 @@
                 </button>
             </span>
         </div>
-        
+
         <br/>
 
         <div>
             Found {{movies.length}} movies for {{selectedGenre}} Genre{{selectedGenre == 'all' ? 's' : ''}}
         </div>
-        
+
         <br/>
 
         <div>
+            <button class='btn btn-primary' (click)='toggleFormat("U")'>
+                {{formatFilter.includes('B') ? 'Hide' : 'Show'}} UHD
+            </button>
             <button class='btn btn-primary' (click)='toggleFormat("B")'>
                 {{formatFilter.includes('B') ? 'Hide' : 'Show'}} Bluray
             </button>
@@ -61,11 +63,7 @@
                 <tbody>
                     <tr *ngFor='let movie of movies | movieSearchFilter:nameFilter | movieFormatFilter:formatFilter'>
                         <td>
-                            <img *ngIf='movie.show'
-                                [src]='movie.imageUrl'
-                                [title]='movie.name'
-                                [style.width.px]='imageWidth'
-                                [style.margin.width]='imageMargin'/>
+                            <img *ngIf='movie.show' [src]='movie.imageUrl' [title]='movie.name' [style.width.px]='imageWidth' [style.margin.width]='imageMargin' />
                         </td>
                         <td>
                             <a [routerLink]="['/movie', movie.id]">
@@ -74,14 +72,10 @@
                         </td>
                         <td>{{movie.genreId | genreDescriptionPipe:genres}}</td>
                         <td *ngIf='movie.format=="D"'>
-                            <img src="./app/assets/icons/dvd.png" 
-                                title="DVD"
-                                style="width:80px;margin:2px"/>
+                            <img src="./app/assets/icons/dvd.png" title="DVD" style="width:80px;margin:2px" />
                         </td>
                         <td *ngIf='movie.format=="B"'>
-                            <img src="./app/assets/icons/bluray.png" 
-                                title="Blu-ray"
-                                style="width:80px;margin:2px"/>
+                            <img src="./app/assets/icons/bluray.png" title="Blu-ray" style="width:80px;margin:2px" />
                         </td>
                         <td>{{movie.duration | minutesToHoursPipe}}</td>
                         <td>
