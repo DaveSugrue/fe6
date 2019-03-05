@@ -1,6 +1,6 @@
 import {IStatus} from '../shared/status';
 
-export interface IMovieResponse{
+export interface IMovieResponse {
 	status: IStatus;
 	objects: any;
 }

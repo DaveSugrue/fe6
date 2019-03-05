@@ -66,8 +66,8 @@
                             <img *ngIf='movie.show' [src]='movie.imageUrl' [title]='movie.name' [style.width.px]='imageWidth' [style.margin.width]='imageMargin' />
                         </td>
                         <td>
-                            <a [routerLink]="['/movie', movie.id]">
-                                {{movie.name}}
+                            <a [routerLink]="['/movies', movie.id]">
+                                {{movie.id}} - {{movie.name}}
                             </a>
                         </td>
                         <td>{{movie.genreId | genreDescriptionPipe:genres}}</td>
@@ -76,6 +76,9 @@
                         </td>
                         <td *ngIf='movie.format=="B"'>
                             <img src="./app/assets/icons/bluray.png" title="Blu-ray" style="width:80px;margin:2px" />
+                        </td>
+                        <td *ngIf='movie.format=="U"'>
+                            <img src="./app/assets/icons/uhd.png" title="UHD Blur-ray" style="width:80px;margin:2px" />
                         </td>
                         <td>{{movie.duration | minutesToHoursPipe}}</td>
                         <td>

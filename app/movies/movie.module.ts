@@ -31,7 +31,7 @@ import { SliderModule } from 'primeng/components/slider/slider';
 		RouterModule.forChild([
 			{ path: 'moviesserviced', component: MovieListServicedComponent },
 			{ path: 'movies', component: MovieListComponent },
-			{ path: 'movie/:id', component: MovieDetailComponent}
+			{ path: 'movies/:id', component: MovieDetailComponent}
 		])
 	],
 	providers: [

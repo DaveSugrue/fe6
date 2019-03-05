@@ -59,6 +59,8 @@ export class MovieListServicedComponent implements OnInit {
 			let formatPath = 'dvd/';
 			if (movie.format == 'B') {
 				formatPath = 'bluray/';
+			} else if (movie.format == 'U') {
+				formatPath = 'uhd/';
 			}
 
 			// Don't show image if none is specified on database
