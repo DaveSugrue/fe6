@@ -15,10 +15,10 @@ export class MovieService {
 
 	private _hostUrl = 'http://192.168.1.1:8090/';
 	private _movieUrl = this._hostUrl + 'movies';
-	private _genreUrl = this._hostUrl +'genres';
+	private _genreUrl = this._hostUrl + 'genres';
 	
 	status: IStatus;
-	//dotsProducts: IDotsProduct[] = [];
+	// dotsProducts: IDotsProduct[] = [];
 
 	constructor( private _http: Http){}
 
@@ -38,7 +38,7 @@ export class MovieService {
 	}
 
 	getMovie(id: number): Observable<IMovie> {
-		let url: string = this._movieUrl + '?id=' + id;
+		let url: string = this._movieUrl + '/' + id;
 		return this._http.get(url)
 			.map((response: Response) => { 
 				let resp = <IMovieResponse>response.json();
@@ -50,18 +50,18 @@ export class MovieService {
 	}
 
 	updateMovie(movie: IMovie): Observable<IMovie> {
-    	let body = JSON.stringify(movie);
+		let body = JSON.stringify(movie);
 		let headers = new Headers({ 'Content-Type': 'application/json' });
-    	let options = new RequestOptions({ headers: headers });
+		let options = new RequestOptions({ headers: headers });
     	
 		return this._http.post(this._movieUrl, body, options)
-            .map((response: Response) => {
+			.map((response: Response) => {
 				let resp = <IMovieResponse>response.json();
 				let status = resp.status;
 				let movies = <IMovie[]>resp.objects;
 				return movies[0]
 			})
-            .catch(this.handleError);
+			.catch(this.handleError);
 	}
 
 	getGenres(): Observable<IGenre[]> {
@@ -75,7 +75,7 @@ export class MovieService {
 			.catch(this.handleError);
 	}
 
-	private handleError(error: Response){
+	private handleError(error: Response) {
 		console.error(error);
 		return Observable.throw(error.json().error || 'Server error');
 	}

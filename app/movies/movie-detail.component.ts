@@ -12,7 +12,7 @@ import { MovieService } from './movie.service';
 	styleUrls: ['app/movies/movie-list.component.css']
 })
 
-export class MovieDetailComponent{
+export class MovieDetailComponent {
 	pageTitle: string = 'Movie Detail';
 	movie: IMovie = <IMovie>{};
 	genres: IGenre[] = [];
@@ -48,14 +48,17 @@ export class MovieDetailComponent{
 				});
 	}
 
-	setImageUrl(): void{
+	setImageUrl(): void {
 		let rootImageUrl = './app/assets/images/';
 		let formatPath = 'dvd/';
-		if (this.movie.format == 'B'){
+		if (this.movie.format == 'B') {
 			formatPath = 'bluray/';
 		}
+		if (this.movie.format == 'U') {
+			formatPath = 'uhd/';
+		}
 
-		//Don't show image if none is specified on database
+		// Don't show image if none is specified on database
 		this.movie.show = true
 		if (null == this.movie.image) {
 			this.movie.show = false;
@@ -65,29 +68,29 @@ export class MovieDetailComponent{
 
 	toggleEdit(): void {
 		this.edit = !this.edit;
-		this.saved = "X";//reset the saved flag
+		this.saved = "X"; // reset the saved flag
 	}
 
-	requiresSave(): void{
+	requiresSave(): void {
 		console.log("needs saving!!!")
 		this.saved = "N";
 	}
 
 	saveMovie(): void {
 		if (this.validMovie()) {
-			if (this.create) { //creating
+			if (this.create) { // creating
 				
-			} else { //updating
+			} else { // updating
 				this._movieService.updateMovie(this.movie)
 				this._movieService.updateMovie(this.movie)
-                    .subscribe(
+					.subscribe(
 						movie => this.saved = "Y",
-                		error =>  this.errorMessage = <any>error);
+						error =>  this.errorMessage = <any>error);
 			}
 		}
 	}
 
-	validMovie(): boolean{
+	validMovie(): boolean {
 		return true;
 	}
 
