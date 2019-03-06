@@ -54,7 +54,7 @@ export class MovieListServicedComponent implements OnInit {
 	}
 
 	updateIconUrls(): void {
-		let rootImageUrl = './app/assets/icons/';
+		let rootImageUrl = './app/assets/images/';
 		for (let movie of this.movies) {
 			let formatPath = 'dvd/';
 			if (movie.format == 'B') {

@@ -50,11 +50,12 @@ export class MovieService {
 	}
 
 	updateMovie(movie: IMovie): Observable<IMovie> {
+		let url: string = this._movieUrl + '/' + movie.id;
 		let body = JSON.stringify(movie);
 		let headers = new Headers({ 'Content-Type': 'application/json' });
 		let options = new RequestOptions({ headers: headers });
     	
-		return this._http.post(this._movieUrl, body, options)
+		return this._http.put(url, body, options)
 			.map((response: Response) => {
 				let resp = <IMovieResponse>response.json();
 				let status = resp.status;

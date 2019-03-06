@@ -36,7 +36,7 @@
 
         <div>
             <button class='btn btn-primary' (click)='toggleFormat("U")'>
-                {{formatFilter.includes('B') ? 'Hide' : 'Show'}} UHD
+                {{formatFilter.includes('U') ? 'Hide' : 'Show'}} UHD
             </button>
             <button class='btn btn-primary' (click)='toggleFormat("B")'>
                 {{formatFilter.includes('B') ? 'Hide' : 'Show'}} Bluray
@@ -67,7 +67,7 @@
                         </td>
                         <td>
                             <a [routerLink]="['/movies', movie.id]">
-                                {{movie.id}} - {{movie.name}}
+                                {{movie.name}}
                             </a>
                         </td>
                         <td>{{movie.genreId | genreDescriptionPipe:genres}}</td>
